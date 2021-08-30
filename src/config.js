@@ -27,6 +27,7 @@ export default {
     loadUrl: "", // 配置loadUrl的地址，luckysheet会通过ajax请求表格数据，默认载入status为1的sheet数据中的所有data，其余的sheet载入除data字段外的所有字段
     loadSheetUrl: "", //配置loadSheetUrl的地址，参数为gridKey（表格主键） 和 index（sheet主键合集，格式为[1,2,3]），返回的数据为sheet的data字段数据集合
     gridKey: "", // 表格唯一标识符
+    username: "", // 当前用户的jobNo，用于企业微信显示人名
     updateUrl: "", //表格数据的更新地址
     updateImageUrl: "", //缩略图的更新地址
     allowUpdate: false, //是否允许编辑后的后台更新

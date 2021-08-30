@@ -67,7 +67,6 @@ luckysheet.create = function (setting) {
     let loadurl = extendsetting.loadUrl,
         menu = extendsetting.menu,
         title = extendsetting.title;
-
     let container = extendsetting.container;
     Store.container = container;
     Store.luckysheetfile = extendsetting.data;
@@ -81,6 +80,7 @@ luckysheet.create = function (setting) {
     Store.defaultSheetNameMaxLength = extendsetting.defaultSheetNameMaxLength;
     Store.fontList = extendsetting.fontList;
     server.gridKey = extendsetting.gridKey;
+    server.username = extendsetting.username;
     server.loadUrl = extendsetting.loadUrl;
     server.updateUrl = extendsetting.updateUrl;
     server.updateImageUrl = extendsetting.updateImageUrl;
@@ -172,7 +172,13 @@ luckysheet.create = function (setting) {
         initialWorkBook();
     }
     else {
-        $.post(loadurl, {"gridKey" : server.gridKey}, function (d) {
+        $.ajaxSetup({
+            xhrFields: {
+                withCredentials: true //允许跨域带Cookie
+            },
+            contentType:"application/json; charset=utf-8"
+        })
+        $.post(loadurl, JSON.stringify({"gridKey" : server.gridKey}), function (d) {
             let data = new Function("return " + d)();
             Store.luckysheetfile = data;
 

@@ -149,22 +149,22 @@ function serve(done) {
 
 // Monitoring file changes
 function watcher(done) {
-    watch(paths.core,{ delay: 500 }, series(core, reloadBrowser));
+    // watch(paths.core,{ delay: 500 }, series(core, reloadBrowser));
 
-    // watch plugins and css
-    watch(paths.pluginsCss,{ delay: 500 }, series(pluginsCss, reloadBrowser));
-    watch(paths.plugins,{ delay: 500 }, series(plugins, reloadBrowser));
-    watch(paths.css,{ delay: 500 }, series(css, reloadBrowser));
-    watch(paths.pluginsJs,{ delay: 500 }, series(pluginsJs, reloadBrowser));
+    // // watch plugins and css
+    // watch(paths.pluginsCss,{ delay: 500 }, series(pluginsCss, reloadBrowser));
+    // watch(paths.plugins,{ delay: 500 }, series(plugins, reloadBrowser));
+    // watch(paths.css,{ delay: 500 }, series(css, reloadBrowser));
+    // watch(paths.pluginsJs,{ delay: 500 }, series(pluginsJs, reloadBrowser));
 
-    // watch static
-    watch(paths.staticHtml,{ delay: 500 }, series(copyStaticHtml, reloadBrowser));
-    watch(paths.staticFonts,{ delay: 500 }, series(copyStaticFonts, reloadBrowser));
-    watch(paths.staticAssets,{ delay: 500 }, series(copyStaticAssets, reloadBrowser));
-    watch(paths.staticImages,{ delay: 500 }, series(copyStaticImages, reloadBrowser));
-    watch(paths.staticExpendPlugins,{ delay: 500 }, series(copyStaticExpendPlugins, reloadBrowser));
-    watch(paths.staticDemoData,{ delay: 500 }, series(copyStaticDemoData, reloadBrowser));
-    watch(paths.staticCssImages,{ delay: 500 }, series(copyStaticCssImages, reloadBrowser));
+    // // watch static
+    // watch(paths.staticHtml,{ delay: 500 }, series(copyStaticHtml, reloadBrowser));
+    // watch(paths.staticFonts,{ delay: 500 }, series(copyStaticFonts, reloadBrowser));
+    // watch(paths.staticAssets,{ delay: 500 }, series(copyStaticAssets, reloadBrowser));
+    // watch(paths.staticImages,{ delay: 500 }, series(copyStaticImages, reloadBrowser));
+    // watch(paths.staticExpendPlugins,{ delay: 500 }, series(copyStaticExpendPlugins, reloadBrowser));
+    // watch(paths.staticDemoData,{ delay: 500 }, series(copyStaticDemoData, reloadBrowser));
+    // watch(paths.staticCssImages,{ delay: 500 }, series(copyStaticCssImages, reloadBrowser));
 
     done();
 }

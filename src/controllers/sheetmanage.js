@@ -230,7 +230,8 @@ const sheetmanage = {
         }
 
         let _this = this;
-
+		// const map = new Map()
+		// Store.luckysheetfile = Store.luckysheetfile.filter(item => !map.has(item.index) && map.set(item.index), 1)
         let order = Store.luckysheetfile.length;
         let index = _this.generateRandomSheetIndex();
 
@@ -238,7 +239,7 @@ const sheetmanage = {
         
         $("#luckysheet-sheet-container-c").append(replaceHtml(sheetHTML, { "index": index, "active": "", "name": sheetname, "style": "","colorset":"" }));
 
-        let sheetconfig = { 
+        let sheetconfig = {
             "name": sheetname, 
             "color": "", 
             "status": "0", 
@@ -735,7 +736,7 @@ const sheetmanage = {
 
         //初始化的时候 记录选区
         let select_save = [];
-        file.jfgird_select_save = file.jfgird_select_save || [];
+        file.jfgird_select_save = Array.isArray(file.jfgird_select_save) ? file.jfgird_select_save : (file.jfgird_select_save.range || []);
         file.jfgird_select_save.forEach(item=>select_save.push({"row":item.row,"column":item.column}));
         file.luckysheet_select_save = select_save;
         
@@ -914,7 +915,13 @@ const sheetmanage = {
                         execF();
                         return;
                     }
-                    $.post(loadSheetUrl, {"gridKey" : server.gridKey, "index": sheetindex.join(",")}, function (d) {
+                    $.ajaxSetup({
+                        xhrFields: {
+                            withCredentials: true //允许跨域带Cookie
+                        },
+                        contentType:"application/json; charset=utf-8"
+                    })
+                    $.post(loadSheetUrl, JSON.stringify({"gridKey" : server.gridKey, "index": sheetindex.join(",")}), function (d) {
                         let dataset = new Function("return " + d)();
                         
                         for(let item in dataset){
@@ -1236,8 +1243,13 @@ const sheetmanage = {
                 $("#luckysheet-grid-window-1").append(luckysheetlodingHTML());
 
                 let sheetindex = _this.checkLoadSheetIndex(file);
-                
-                $.post(loadSheetUrl, {"gridKey" : server.gridKey, "index": sheetindex.join(",")}, function (d) {
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true //允许跨域带Cookie
+                    },
+                    contentType:"application/json; charset=utf-8"
+                })
+                $.post(loadSheetUrl, JSON.stringify({"gridKey" : server.gridKey, "index": sheetindex.join(",")}), function (d) {
                     let dataset = new Function("return " + d)();
                     file.celldata = dataset[index.toString()];
                     let data = _this.buildGridData(file);
@@ -1511,7 +1523,7 @@ const sheetmanage = {
 
         if(index!=null){
             let $sheet = $("#luckysheet-sheets-item" + index);
-            $c.scrollLeft($sheet.offset().left);
+            $sheet.offset() && $c.scrollLeft($sheet.offset().left);
         }
 
 

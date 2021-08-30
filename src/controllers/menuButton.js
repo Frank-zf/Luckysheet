@@ -2399,8 +2399,13 @@ const menuButton = {
                             for(let i = 0; i < file.length; i++){
                                 sheetindex.push(file[i].index);
                             }
-
-                            $.post(loadSheetUrl, {"gridKey" : server.gridKey, "index": sheetindex.join(",")}, function (d) {
+                            $.ajaxSetup({
+                                xhrFields: {
+                                    withCredentials: true //允许跨域带Cookie
+                                },
+                                contentType:"application/json; charset=utf-8"
+                            })
+                            $.post(loadSheetUrl, JSON.stringify({"gridKey" : server.gridKey, "index": sheetindex.join(",")}), function (d) {
                                 let dataset = new Function("return " + d)();
 
                                 setTimeout(function(){
