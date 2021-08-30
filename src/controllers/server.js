@@ -231,9 +231,9 @@ const server = {
 				if (!mode) {
 					data = data.context ? JSON.parse(data.context) : data
 				}
-				console.log(data, 'data 内部信息')
+				// console.log(data, 'data 内部信息')
 				method.createHookFunction('cooperativeMessage', data)
-				console.info(data);
+				// console.info(data);
 				let type = data.type;
 				let { message, id } = data;
 				// 用户退出时，关闭协同编辑时其提示框

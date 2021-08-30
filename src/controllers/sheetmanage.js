@@ -919,7 +919,6 @@ const sheetmanage = {
 						},
 						contentType: "application/json; charset=utf-8"
 					})
-					console.log(1111)
 					$.post(loadSheetUrl, JSON.stringify({ "gridKey": server.gridKey, "index": sheetindex.join(",") }), function (d) {
 						let dataset = new Function("return " + d)();
 
@@ -1246,7 +1245,7 @@ const sheetmanage = {
 					},
 					contentType: "application/json; charset=utf-8"
 				})
-				$.post(loadSheetUrl, JSON.stringify({ "gridKey": server.gridKey, "index": sheetindex.join(",") }), function (d) {
+				$.post(loadSheetUrl, JSON.stringify({ "gridKey": server.gridKey, "index": sheetindex }), function (d) {
 					let dataset = new Function("return " + d)();
 					file.celldata = dataset[index.toString()];
 					let data = _this.buildGridData(file);
