@@ -249,9 +249,9 @@ const server = {
 				if (type == 1) { //send 成功或失败
 					const dataCopy = data.data
 					if (!dataCopy) return
-					const oldIndex = dataCopy.v
+					const oldIndex = dataCopy.v.index
 					const sheetToUpdate = Store.luckysheetfile.filter((sheet) => sheet.index === oldIndex)[0]
-					if (sheetToUpdate !== null) {
+					if (sheetToUpdate) {
 						setTimeout(() => {
 							const index = dataCopy.i;
 							// const index = dataCopy ? dataCopy.i : null;
